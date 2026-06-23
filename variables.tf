@@ -21,3 +21,9 @@ variable "allowed_ssh_cidr" {
   description = "CIDR blocks allowed to SSH into the instance. Defaults to everywhere (0.0.0.0/0)."
   default     = ["0.0.0.0/0"]
 }
+
+variable "github_repo_url" {
+  type        = string
+  description = "The GitHub repository to clone on boot for learning and backups."
+  default     = "https://github.com/P20000/DOCKER-learning.git"
+}

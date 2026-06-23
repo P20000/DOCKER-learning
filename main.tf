@@ -72,7 +72,7 @@ resource "aws_instance" "docker_host" {
               #!/bin/bash
               # Update packages
               apt-get update -y
-              apt-get install -y ca-certificates curl gnupg
+              apt-get install -y ca-certificates curl gnupg git
 
               # Set up Docker repository keyring
               install -m 0755 -d /etc/apt/keyrings
@@ -95,6 +95,10 @@ resource "aws_instance" "docker_host" {
 
               # Add ubuntu user to docker group to allow running docker without sudo
               usermod -aG docker ubuntu
+
+              # Clone learning repository for workspace/backup
+              git clone ${var.github_repo_url} /home/ubuntu/DOCKER-learning
+              chown -R ubuntu:ubuntu /home/ubuntu/DOCKER-learning
               EOF
 
   # Root block device size & type
