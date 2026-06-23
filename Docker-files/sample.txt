@@ -1,0 +1,5 @@
+This is a sample text file inside the Docker-files directory.
+
+Any Dockerfiles, docker-compose.yml configurations, or script files you place in this folder will be automatically synchronized to your EC2 instance on boot via Git sparse-checkout!
+
+Keep learning and practicing Docker!
