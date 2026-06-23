@@ -24,10 +24,10 @@ resource "aws_key_pair" "generated_key" {
   public_key = tls_private_key.ssh_key.public_key_openssh
 }
 
-# Save the private key to a local file for SSH access
+# Save the private key to a local file for SSH access (stored in ~/.ssh for correct Unix permissions)
 resource "local_sensitive_file" "private_key_file" {
   content         = tls_private_key.ssh_key.private_key_pem
-  filename        = "${path.module}/${var.key_name}.pem"
+  filename        = pathexpand("~/.ssh/${var.key_name}.pem")
   file_permission = "0400"
 }
 
