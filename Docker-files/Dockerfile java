@@ -1,0 +1,22 @@
+# for running that java application on docker. 
+
+FROM eclipse-temurin:17-jdk-alpine AS builder
+
+WORKDIR /build
+
+# copy the source code from host to container
+COPY . . 
+
+RUN javac -d src/Main.java 
+
+#CMD can be overwritten, but not ENTRYPOINT
+CMD ["java", "Main"]
+
+FROM eclipse-temurin:17-jre-alpine AS runtime
+
+WORKDIR /app 
+
+# copy the source code from host to container
+COPY --from=builder /build/Main.class /app/
+
+CMD ["java", "Main"]
